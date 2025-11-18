@@ -8,7 +8,7 @@ import LoadingBar from 'react-top-loading-bar'
 
 const App = (props) => {
   const [progress, setProgress] = useState(0)
-  const [mode, setMode] = useState('light'); //Whether dark mode is enable or not
+  const [mode, setMode] = useState('light'); 
 
   const toggleMode = () => {
     if (mode === 'light') {

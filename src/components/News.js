@@ -15,50 +15,36 @@ const News = (props) => {
 
   const updateNews = async () => {
     props.setProgress(10);
-    setLoading(true);
-
-    const apiUrl = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&apikey=70c5d5f0426a737b9316e8df0d22e6a2`;
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
-
-    let data = await fetch(proxyUrl);
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=10926557114f4a8999cb0852b48ad92a&page=${page}&pageSize=${props.pageSize}`;
+    setLoading(true)
+    let data = await fetch(url);
+    props.setProgress(30);
+    let parsedData = await data.json()
     props.setProgress(70);
-    let response = await data.json();
-    let parsedData = JSON.parse(response.contents);
-
-    setArticles(parsedData.articles || []);
-    settotalResults(999);
-    setLoading(false);
+    setArticles(parsedData.articles)
+    settotalResults(parsedData.totalResults)
+    setLoading(false)
     props.setProgress(100);
-  };
-
-  useEffect(() => {
-    document.title = `${capitalizeFirstLetter(props.category)} - Shutter`;
-    updateNews();
-    // eslint-disable-next-line
-  }, [])
-
-
- const fetchMoreData = async () => {
-  const nextPage = page + 1;
-  setPage(nextPage);
-
-  // ← YEH LINE FIX KAR DI – &page=${nextPage} add kiya
-  const apiUrl = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&page=${nextPage}&apikey=70c5d5f0426a737b9316e8df0d22e6a2`;
-  
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
-
-  try {
-    let data = await fetch(proxyUrl);
-    let response = await data.json();
-    let parsedData = JSON.parse(response.contents);
-
-    if (parsedData.articles && parsedData.articles.length > 0) {
-      setArticles(articles.concat(parsedData.articles));
-    }
-  } catch (err) {
-    console.log("No more articles or error:", err);
   }
-};
+  
+  const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=10926557114f4a8999cb0852b48ad92a&page=${page + 1}&pageSize=${props.pageSize}`;
+    setPage(page + 1)
+    
+    let data = await fetch(url);
+    let parsedData = await data.json()
+    setArticles(articles.concat(parsedData.articles))
+    settotalResults(parsedData.totalResults)
+    
+  };
+  
+  
+    useEffect(() => {
+      document.title = `${capitalizeFirstLetter(props.category)} - Shutter`;
+      updateNews();
+      // eslint-disable-next-line
+    }, [])
+  
 
   return (
     <>
@@ -71,22 +57,15 @@ const News = (props) => {
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
-        hasMore={articles.length < 999}   // ← yeh kar de (999 ya 1000)
+        hasMore={articles.length !== totalResults}
         loader={<Spinner />}
       >
         <div className='container'>
           <div className='row'>
             {articles.map((element) => {
               return <div className='col-md-4' key={element.url}>
-                <NewsItem
-                  title={element.title ? element.title : ""}
-                  description={element.description ? element.description : ""}
-                  imageUrl={element.image}   // ← YE CHANGE KAR DO
-                  newsUrl={element.url}
-                  author={element.author}
-                  date={element.publishedAt}
-                  source={element.source.name}
-                />
+                <NewsItem title={element.title ? element.title : ""} description={element.description ? element.description : ""}
+                  imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
               </div>
             })}
           </div>
@@ -109,4 +88,4 @@ News.propTypes = {
   category: PropTypes.string,
 }
 
-export default News
+export default News;

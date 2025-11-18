@@ -88,8 +88,8 @@ const NewsItem = (props) => {
 
           <a href={newsUrl} target="_blank" rel="noreferrer"
             className={`btn btn-sm mt-3 w-100 fw-bold ${props.mode === 'dark'
-              ? 'btn-warning text-dark'      // Golden button in dark mode
-              : 'btn-primary'                // Classic blue in light mode
+              ? 'btn-warning text-dark'     
+              : 'btn-primary'             
               }`}
             style={{ borderRadius: '10px', padding: '11px' }}>
             Read More →
