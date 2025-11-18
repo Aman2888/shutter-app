@@ -14,18 +14,20 @@ const News = (props) => {
   }
 
   const updateNews = async () => {
-    props.setProgress(10);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=10926557114f4a8999cb0852b48ad92a&page=${page}&pageSize=${props.pageSize}`;
-    setLoading(true)
-    let data = await fetch(url);
-    props.setProgress(30);
-    let parsedData = await data.json()
-    props.setProgress(70);
-    setArticles(parsedData.articles)
-    settotalResults(parsedData.totalResults)
-    setLoading(false)
-    props.setProgress(100);
-  }
+  props.setProgress(10);
+  setLoading(true);
+
+  const url = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&apikey=${process.env.REACT_APP_GNEWS_KEY}&page=${page}`;
+
+  let data = await fetch(url);
+  props.setProgress(50);
+  let parsedData = await data.json();
+  props.setProgress(100);
+
+  setArticles(parsedData.articles || []);
+  settotalResults(parsedData.totalArticles || 0);
+  setLoading(false);
+}
 
   useEffect(() => {
     document.title = `${capitalizeFirstLetter(props.category)} - Shutter`;
@@ -35,15 +37,17 @@ const News = (props) => {
 
 
   const fetchMoreData = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=10926557114f4a8999cb0852b48ad92a&page=${page + 1}&pageSize=${props.pageSize}`;
-    setPage(page + 1)
+  const nextPage = page + 1;
+  setPage(nextPage);
 
-    let data = await fetch(url);
-    let parsedData = await data.json()
-    setArticles(articles.concat(parsedData.articles))
-    settotalResults(parsedData.totalResults)
+  const url = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&apikey=${process.env.REACT_APP_GNEWS_KEY}&page=${nextPage}`;
 
-  };
+  let data = await fetch(url);
+  let parsedData = await data.json();
+
+  setArticles(articles.concat(parsedData.articles || []));
+  settotalResults(parsedData.totalArticles || 0);
+};
 
 
   return (
@@ -57,7 +61,7 @@ const News = (props) => {
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
-        hasMore={articles.length !== totalResults}
+        hasMore={articles.length !== 999}
         loader={<Spinner />}
       >
         <div className='container'>
