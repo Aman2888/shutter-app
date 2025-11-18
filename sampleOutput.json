@@ -1,0 +1,56 @@
+{
+    "status": "ok",
+    "totalResults": 5,
+    "articles": [
+      {
+        "source": {"id": "news-com-au","name": "News.com.au"},
+        "author": null,
+        "title": "‘I will fight it’: Khawaja comes clean on ban",
+        "description": "Australian cricketer Usman Khawaja vowed Wednesday to fight a ban on him wearing shoes during a match highlighting the plight of people in Gaza, saying it was a “humanitarian appeal” and not a political message.",
+        "url": "https://www.news.com.au/sport/cricket/my-heart-cant-take-it-usman-khawaja-vows-to-fight-icc-shoe-ban/news-story/62c5cfdf85002591360448d5b50a9eea",
+        "urlToImage": "https://content.api.news/v3/images/bin/b2e2cf9ebde9aa3fbeaa0fce1123781f",
+        "publishedAt": "2023-12-13T12:22:00Z",
+        "content": "Australian cricketer Usman Khawaja vowed Wednesday to fight a ban on him wearing shoes during a match highlighting the plight of people in Gaza, saying it was a “humanitarian appeal” and not a politi… [+3322 chars]"
+      },
+      {
+        "source": {"id": "bbc-sport","name": "BBC Sport"},
+        "author": null,
+        "title": "Usman Khawaja to 'fight' cricket authorities' decision on Gaza message",
+        "description": "In a video message, Khawaja said he \"respected\" authorities' decision to bar his shoes bearing the words \"all lives are equal\".",
+        "url": "http://www.bbc.co.uk/news/world-australia-67700408",
+        "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/DE29/production/_132037865_gettyimages-1846372164.jpg",
+        "publishedAt": "2023-12-13T10:22:24.2476126Z",
+        "content": "Australian cricketer Usman Khawaja says he will \"fight\" the decision to bar his shoes with pro-Palestinian messages.\r\nThe batter had planned to wear shoes bearing the words \"all lives are equal\" and … [+2976 chars]"
+      },
+      {
+        "source": {"id": "news-com-au","name": "News.com.au"},
+        "author": "Andrew McMurtry",
+        "title": "‘Absolute chaos’: Warner truth laid bare",
+        "description": "The wait for the Australian international cricket summer is almost over ahead of Thursday’s first Test against Pakistan, but the entire lead up has been dominated by the feud between David Warner and Mitchell Johnson.",
+        "url": "https://www.news.com.au/sport/cricket/absolute-chaos-david-warner-truth-laid-bare-amid-mitchell-johnson-feud/news-story/09132cddd248a89947eb642e5b40bcc8",
+        "urlToImage": "https://content.api.news/v3/images/bin/0cfdd3720044e84fc1e85b88cfc7d94b",
+        "publishedAt": "2023-12-13T10:07:00Z",
+        "content": "The wait for the Australian international cricket summer is almost over ahead of Thursday’s first Test against Pakistan, but the entire lead up has been dominated by the feud between David Warner and… [+5946 chars]"
+      },
+      {
+        "source": {"id": "espn-cric-info","name": "ESPN Cric Info"},
+        "author": null,
+        "title": "PCB hands Umar Akmal three-year ban from all cricket | ESPNcricinfo.com",
+        "description": "Penalty after the batsman pleaded guilty to not reporting corrupt approaches | ESPNcricinfo.com",
+        "url": "http://www.espncricinfo.com/story/_/id/29103103/pcb-hands-umar-akmal-three-year-ban-all-cricket",
+        "urlToImage": "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1099495_800x450.jpg",
+        "publishedAt": "2020-04-27T11:41:47Z",
+        "content": "Umar Akmal's troubled cricket career has hit its biggest roadblock yet, with the PCB handing him a ban from all representative cricket for three years after he pleaded guilty of failing to report det… [+1506 chars]"
+      },
+      {
+        "source": {"id": "espn-cric-info","name": "ESPN Cric Info"},
+        "author": null,
+        "title": "What we learned from watching the 1992 World Cup final in full again | ESPNcricinfo.com",
+        "description": "Wides, lbw calls, swing - plenty of things were different in white-ball cricket back then | ESPNcricinfo.com",
+        "url": "http://www.espncricinfo.com/story/_/id/28970907/learned-watching-1992-world-cup-final-full-again",
+        "urlToImage": "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg",
+        "publishedAt": "2020-03-30T15:26:05Z",
+        "content": "Last week, we at ESPNcricinfo did something we have been thinking of doing for eight years now: pretend-live ball-by-ball commentary for a classic cricket match. We knew the result, yes, but we tried… [+6823 chars]"
+      }
+    ]
+  }
