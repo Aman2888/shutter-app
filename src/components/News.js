@@ -38,19 +38,27 @@ const News = (props) => {
   }, [])
 
 
-  const fetchMoreData = async () => {
-    const nextPage = page + 1;
-    setPage(nextPage);
+ const fetchMoreData = async () => {
+  const nextPage = page + 1;
+  setPage(nextPage);
 
-    const url = `/api/news?country=${props.country}&category=${props.category}&page=${page}&pageSize=${props.pageSize}`;
-    let data = await fetch(url);
+  // ← YEH LINE FIX KAR DI – &page=${nextPage} add kiya
+  const apiUrl = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&page=${nextPage}&apikey=70c5d5f0426a737b9316e8df0d22e6a2`;
+  
+  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
+
+  try {
+    let data = await fetch(proxyUrl);
     let response = await data.json();
-    let parsedData = JSON.parse(response.contents);  // ← yeh line add kar dena
+    let parsedData = JSON.parse(response.contents);
 
-    setArticles(articles.concat(parsedData.articles || []));
-    settotalResults.current = 999;
-  };
-
+    if (parsedData.articles && parsedData.articles.length > 0) {
+      setArticles(articles.concat(parsedData.articles));
+    }
+  } catch (err) {
+    console.log("No more articles or error:", err);
+  }
+};
 
   return (
     <>
