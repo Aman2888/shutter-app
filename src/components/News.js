@@ -17,19 +17,19 @@ const News = (props) => {
     props.setProgress(10);
     setLoading(true);
 
-    // ← YEH NEW URL — bilkul copy-paste kar
-    const url = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&apikey=${process.env.REACT_APP_GNEWS_KEY}`;
+    const apiUrl = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&apikey=70c5d5f0426a737b9316e8df0d22e6a2`;
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
 
-    let data = await fetch(url);
-    props.setProgress(50);
-    let parsedData = await data.json();
-    props.setProgress(100);
-
-    console.log("GNews Response:", parsedData); // ← ye line add kar di temporary
+    let data = await fetch(proxyUrl);
+    props.setProgress(70);
+    let response = await data.json();
+    let parsedData = JSON.parse(response.contents);
 
     setArticles(parsedData.articles || []);
+    settotalResults(999);
     setLoading(false);
-  }
+    props.setProgress(100);
+  };
 
   useEffect(() => {
     document.title = `${capitalizeFirstLetter(props.category)} - Shutter`;
@@ -42,12 +42,13 @@ const News = (props) => {
     const nextPage = page + 1;
     setPage(nextPage);
 
-    const url = `https://gnews.io/api/v4/top-headlines?country=${props.country}&category=${props.category}&lang=en&max=${props.pageSize}&apikey=${process.env.REACT_APP_GNEWS_KEY}&page=${nextPage}`;
-
+    const url = `/api/news?country=${props.country}&category=${props.category}&page=${page}&pageSize=${props.pageSize}`;
     let data = await fetch(url);
-    let parsedData = await data.json();
+    let response = await data.json();
+    let parsedData = JSON.parse(response.contents);  // ← yeh line add kar dena
 
     setArticles(articles.concat(parsedData.articles || []));
+    settotalResults.current = 999;
   };
 
 
@@ -62,7 +63,7 @@ const News = (props) => {
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
-        hasMore={articles.length !== 999}
+        hasMore={articles.length < 999}   // ← yeh kar de (999 ya 1000)
         loader={<Spinner />}
       >
         <div className='container'>
